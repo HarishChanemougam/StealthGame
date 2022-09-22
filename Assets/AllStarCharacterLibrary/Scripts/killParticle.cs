@@ -4,7 +4,7 @@ using System.Collections;
 
 public class killParticle : MonoBehaviour 
 {
-	ParticleEmitter pe;
+	/*ParticleEmitter pe;
 	public float lifespan;
 	float startTime;
 
@@ -22,5 +22,5 @@ public class killParticle : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-	}
+	}*/
 }
