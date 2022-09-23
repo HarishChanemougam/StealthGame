@@ -16,8 +16,8 @@ namespace Retro.ThirdPersonCharacter
         private Vector2 lastMovementInput;
         private Vector3 moveDirection = Vector3.zero;
 
-        public float gravity = 10;
-        public float jumpSpeed = 4; 
+        public float gravity = 5;
+        public float jumpSpeed = 5; 
 
         public float MaxSpeed = 10;
         private float DecelerationOnStop = 0.00f;
