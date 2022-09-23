@@ -62,6 +62,7 @@ namespace Retro.ThirdPersonCharacter
                 moveDirection = new Vector3(x, 0, y);
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection *= MaxSpeed;
+               
                 if (_playerInput.JumpInput)
                     moveDirection.x = jumpSpeed;
             }
