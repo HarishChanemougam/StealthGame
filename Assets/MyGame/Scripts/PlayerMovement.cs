@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Retro.ThirdPersonCharacter
 {
@@ -6,21 +8,24 @@ namespace Retro.ThirdPersonCharacter
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Combat))]
     [RequireComponent(typeof(CharacterController))]
-    public class Movement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
-        private Animator _animator;
-        private PlayerInput _playerInput;
+        [SerializeField] Animator _animator;
+        [SerializeField] PlayerInput _playerInput;
         private Combat _combat;
         private CharacterController _characterController;
 
         private Vector2 lastMovementInput;
         private Vector3 moveDirection = Vector3.zero;
 
-        public float gravity = 5;
-        public float jumpSpeed = 5; 
+        [SerializeField] Rigidbody _rb;
+        [SerializeField] float speed = 5;
+        [SerializeField] float jumpSpeed = 5; 
 
-        public float MaxSpeed = 10;
+        [SerializeField] float MaxSpeed = 10;
         private float DecelerationOnStop = 0.00f;
+
+        Vector3 _direction;
 
 
         private void Start()
@@ -35,7 +40,7 @@ namespace Retro.ThirdPersonCharacter
         {
             if (_animator == null) return;
 
-            if(_combat.AttackInProgress)
+            if (_combat.AttackInProgress)
             {
                 StopMovementOnAttack();
             }
@@ -58,15 +63,15 @@ namespace Retro.ThirdPersonCharacter
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection *= MaxSpeed;
                 if (_playerInput.JumpInput)
-                    moveDirection.y = jumpSpeed;
+                    moveDirection.x = jumpSpeed;
             }
 
-            moveDirection.y -= gravity * Time.deltaTime;
+            _rb.MovePosition(_rb.transform.position + (_direction * Time.fixedDeltaTime * speed * 2));
             _characterController.Move(moveDirection * Time.deltaTime);
 
             _animator.SetFloat("InputX", x);
             _animator.SetFloat("InputY", y);
-            _animator.SetBool("IsInAir", !grounded);
+            /*_animator.SetBool("IsInAir", !grounded);*/
         }
 
         private void StopMovementOnAttack()
