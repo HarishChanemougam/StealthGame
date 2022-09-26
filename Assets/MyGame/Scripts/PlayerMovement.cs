@@ -1,39 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEngine.EventSystems.EventTrigger;
+using static UnityEngine.InputSystem.InputSettings;
 
 namespace Retro.ThirdPersonCharacter
 {
     [RequireComponent(typeof(PlayerInput))]
-    /*  [RequireComponent(typeof(Animator))]
-      [RequireComponent(typeof(Combat))]*/
-   /* [RequireComponent(typeof(Rigidbody))]*/
+    [RequireComponent(typeof(Animator))]
+  /*  [RequireComponent(typeof(Combat))]
+    [RequireComponent(typeof(Rigidbody))]*/
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] Animator _animator;
+
+    [SerializeField] InputActionReference _moveInput;
+    [SerializeField] Transform _root;
+    [SerializeField] Animator _animator;
+    [SerializeField] float _movingThreshold;
+    [SerializeField] float _speed;
+
+        private PlayerInput playerInput;
+        string _playet;
+        float _speedOfMovementVariabale;
+        Vector2 _playerMovement;
+        Vector3 _aimDirection;
+        Vector2 _direction;
+
+        /*[SerializeField] Animator _animator;
         [SerializeField] PlayerInput _playerInput;
         private Combat _combat;
-       /* private CharacterController _characterController;*/
+        private CharacterController _characterController;
 
         private Vector2 lastMovementInput;
         private Vector3 moveDirection = Vector3.zero;
 
         [SerializeField] Rigidbody _rb;
         [SerializeField] float speed = 5;
-        [SerializeField] float jumpSpeed = 5; 
+        [SerializeField] float jumpSpeed = 5;
 
         [SerializeField] float MaxSpeed = 10;
         private float DecelerationOnStop = 0.00f;
 
         Vector3 _direction;
-        private float z;
+        private float z;*/
 
-        private void Start()
+        /*private void Start()
         {
             _animator = GetComponent<Animator>();
             _playerInput = GetComponent<PlayerInput>();
             _combat = GetComponent<Combat>();
-            /*_rb = GetComponent<Rigidbody>();*/
+            _rb = GetComponent<Rigidbody>();
         }
 
         private void Update()
@@ -72,7 +90,7 @@ namespace Retro.ThirdPersonCharacter
 
             _animator.SetFloat("InputX", x);
             _animator.SetFloat("InputY", y);
-            /*_animator.SetBool("IsInAir", !grounded);*/
+            _animator.SetBool("IsInAir", !grounded);
         }
 
         private void StopMovementOnAttack()
@@ -84,6 +102,52 @@ namespace Retro.ThirdPersonCharacter
 
             _animator.SetFloat("InputX", lastMovementInput.x);
             _animator.SetFloat("InputY", lastMovementInput.y);
+        }*/
+
+        private void Start()
+        {
+            _moveInput.action.started += StartMove;
+            _moveInput.action.performed += UpdateMove;
+            _moveInput.action.canceled += EndMove;        
         }
+
+        private void Update()
+        {
+            _root.transform.Translate(_playerMovement * Time.deltaTime * _speed * 5);
+
+            if(_playerMovement.magnitude > _movingThreshold)
+            {
+                _animator.SetBool("IsMoving", true);
+                _animator.SetFloat("InputX", _playerMovement.x);
+                _animator.SetFloat("InputY", _playerMovement.y);
+            }
+
+            else
+            {
+                _animator.SetBool("IsMoving", false);
+            }
+        }
+
+        private void StartMove(InputAction.CallbackContext obj)
+        {
+            _playerMovement = obj.ReadValue<Vector2>();
+        }
+
+        private void UpdateMove(InputAction.CallbackContext obj)
+        {
+            _playerMovement = obj.ReadValue<Vector2>();
+        }
+
+        private void EndMove(InputAction.CallbackContext obj)
+        {
+            _playerMovement = new Vector2(0, 0);
+        }
+
+        private void LateUpdate()
+        {
+            playerInput = GetComponent<PlayerInput>();
+        }
+     
     }
+
 }
