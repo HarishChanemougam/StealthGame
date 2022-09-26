@@ -5,15 +5,15 @@ using UnityEngine;
 namespace Retro.ThirdPersonCharacter
 {
     [RequireComponent(typeof(PlayerInput))]
-    [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(Combat))]
-    [RequireComponent(typeof(CharacterController))]
+    /*  [RequireComponent(typeof(Animator))]
+      [RequireComponent(typeof(Combat))]*/
+   /* [RequireComponent(typeof(Rigidbody))]*/
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] Animator _animator;
         [SerializeField] PlayerInput _playerInput;
         private Combat _combat;
-        private CharacterController _characterController;
+       /* private CharacterController _characterController;*/
 
         private Vector2 lastMovementInput;
         private Vector3 moveDirection = Vector3.zero;
@@ -26,14 +26,14 @@ namespace Retro.ThirdPersonCharacter
         private float DecelerationOnStop = 0.00f;
 
         Vector3 _direction;
-
+        private float z;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
             _playerInput = GetComponent<PlayerInput>();
             _combat = GetComponent<Combat>();
-            _characterController = GetComponent<CharacterController>();
+            /*_rb = GetComponent<Rigidbody>();*/
         }
 
         private void Update()
@@ -55,20 +55,20 @@ namespace Retro.ThirdPersonCharacter
             var x = _playerInput.MovementInput.x;
             var y = _playerInput.MovementInput.y;
 
-            bool grounded = _characterController.isGrounded;
+            bool grounded = _rb;
 
             if (grounded)
             {
-                moveDirection = new Vector3(x, 0, y);
+                moveDirection = new Vector3(x, 0, z);
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection *= MaxSpeed;
-               
+
                 if (_playerInput.JumpInput)
                     moveDirection.x = jumpSpeed;
             }
 
-            _rb.MovePosition(_rb.transform.position + (_direction * Time.fixedDeltaTime * speed * 2));
-            _characterController.Move(moveDirection * Time.deltaTime);
+            _rb.MovePosition(_rb.transform.position + (_direction * Time.fixedDeltaTime * speed * 5));
+            _rb.MovePosition(moveDirection * Time.deltaTime);
 
             _animator.SetFloat("InputX", x);
             _animator.SetFloat("InputY", y);
