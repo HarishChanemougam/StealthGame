@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,9 +26,9 @@ namespace Retro.ThirdPersonCharacter
         string _playet;
         float _speedOfMovementVariabale;
         Vector2 _playerMovement;
-        Vector3 _aimDirection;
         Vector2 _direction;
-
+        Vector3 _aimDirection;
+        #region
         /*[SerializeField] Animator _animator;
         [SerializeField] PlayerInput _playerInput;
         private Combat _combat;
@@ -103,7 +104,7 @@ namespace Retro.ThirdPersonCharacter
             _animator.SetFloat("InputX", lastMovementInput.x);
             _animator.SetFloat("InputY", lastMovementInput.y);
         }*/
-
+        #endregion
         private void Start()
         {
             _moveInput.action.started += StartMove;
@@ -117,15 +118,18 @@ namespace Retro.ThirdPersonCharacter
 
             if(_playerMovement.magnitude > _movingThreshold)
             {
+                if (_animator == null) return;
+
                 _animator.SetBool("IsMoving", true);
-                _animator.SetFloat("InputX", _playerMovement.x);
-                _animator.SetFloat("InputY", _playerMovement.y);
+               _animator.SetFloat("InputX", _playerMovement.x);
+               _animator.SetFloat("InputY", _playerMovement.y);
+               
             }
 
             else
             {
                 _animator.SetBool("IsMoving", false);
-            }
+           }
         }
 
         private void StartMove(InputAction.CallbackContext obj)
@@ -140,7 +144,7 @@ namespace Retro.ThirdPersonCharacter
 
         private void EndMove(InputAction.CallbackContext obj)
         {
-            _playerMovement = new Vector2(0, 0);
+            _playerMovement = new Vector3(0, 0, 0);
         }
 
         private void LateUpdate()
