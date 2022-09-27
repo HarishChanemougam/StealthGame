@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.InputSystem.InputSettings;
+using static UnityEngine.LightAnchor;
 
 namespace Retro.ThirdPersonCharacter
 {
     [RequireComponent(typeof(PlayerInput))]
-    [RequireComponent(typeof(Animator))]
+    /*[RequireComponent(typeof(Animator))]*/
   /*  [RequireComponent(typeof(Combat))]
     [RequireComponent(typeof(Rigidbody))]*/
     public class PlayerMovement : MonoBehaviour
@@ -22,12 +24,24 @@ namespace Retro.ThirdPersonCharacter
     [SerializeField] float _movingThreshold;
     [SerializeField] float _speed;
 
+        #region
+    [SerializeField] bool _followCameraOrientation;//ScriptKevinCamera
+    [SerializeField, ShowIf(nameof(_followCameraOrientation))] Camera _camera;//ScriptKevinCamera
+    [SerializeField] CharacterController _controller;//ScriptKevinCamera
+        #endregion
+
         private PlayerInput playerInput;
         string _playet;
         float _speedOfMovementVariabale;
         Vector2 _playerMovement;
         Vector2 _direction;
         Vector3 _aimDirection;
+
+        #region
+        Vector3 _directionFromBrain;//ScriptKevinCamera
+        Vector3 _calculatedDirection;//ScriptKevinCamera
+        #endregion
+
         #region
         /*[SerializeField] Animator _animator;
         [SerializeField] PlayerInput _playerInput;
@@ -123,7 +137,23 @@ namespace Retro.ThirdPersonCharacter
                 _animator.SetBool("IsMoving", true);
                _animator.SetFloat("InputX", _playerMovement.x);
                _animator.SetFloat("InputY", _playerMovement.y);
-               
+
+                #region
+                var tmpDirection = (_directionFromBrain * _speed * Time.deltaTime);//ScriptKevinCamera
+                var forwardForCamera = _camera.transform.TransformDirection(tmpDirection);//ScriptKevinCamera
+                _calculatedDirection.x = forwardForCamera.x;//ScriptKevinCamera
+                _calculatedDirection.z = forwardForCamera.z;//ScriptKevinCamera
+
+                if (_followCameraOrientation)   // Follow camera orientation //ScriptKevinCamera
+                {
+                    var lookAtDirection = new Vector3(_camera.transform.forward.x, 0, _camera.transform.forward.z);//ScriptKevinCamera
+                    _controller.transform.LookAt(_controller.transform.position + lookAtDirection);//ScriptKevinCamera
+                }
+                else  // Follow direction applied //ScriptKevinCamera
+                {
+
+                }
+                #endregion
             }
 
             else
@@ -154,4 +184,5 @@ namespace Retro.ThirdPersonCharacter
      
     }
 
+    
 }
