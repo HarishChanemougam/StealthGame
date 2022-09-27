@@ -136,8 +136,8 @@ namespace Retro.ThirdPersonCharacter
 
                _animator.SetBool("IsMoving", true);
                _animator.SetFloat("InputX", _playerMovement.x);
-                _animator.SetFloat("InputZ", _playerMovement.z);
-                _animator.SetFloat("InputY", value: _playerMovement.y);
+               _animator.SetFloat("InputZ", _playerMovement.z);
+               _animator.SetFloat("InputY",_playerMovement.y);
 
 
                 #region

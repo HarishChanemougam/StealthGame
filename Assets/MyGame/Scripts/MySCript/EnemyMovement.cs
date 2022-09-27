@@ -1,12 +1,19 @@
+using NaughtyAttributes;
 using Retro.ThirdPersonCharacter;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.TextCore.Text;
+using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float _moveSpeed;
+    [SerializeField] float _attackDistance;
+    [SerializeField] Animator _animator;
     [SerializeField] PlayerMovement _player;
+    [SerializeField] Rigidbody _root;
     private Rigidbody _rb;
 
 
