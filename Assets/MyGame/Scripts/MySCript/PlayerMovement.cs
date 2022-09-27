@@ -33,8 +33,8 @@ namespace Retro.ThirdPersonCharacter
         private PlayerInput playerInput;
         string _playet;
         float _speedOfMovementVariabale;
-        Vector2 _playerMovement;
-        Vector2 _direction;
+        Vector3 _playerMovement;
+        Vector3 _direction;
         Vector3 _aimDirection;
 
         #region
@@ -134,9 +134,11 @@ namespace Retro.ThirdPersonCharacter
             {
                 if (_animator == null) return;
 
-                _animator.SetBool("IsMoving", true);
+               _animator.SetBool("IsMoving", true);
                _animator.SetFloat("InputX", _playerMovement.x);
-               _animator.SetFloat("InputY", _playerMovement.y);
+                _animator.SetFloat("InputZ", _playerMovement.z);
+                _animator.SetFloat("InputY", value: _playerMovement.y);
+
 
                 #region
                 var tmpDirection = (_directionFromBrain * _speed * Time.deltaTime);//ScriptKevinCamera
@@ -159,17 +161,21 @@ namespace Retro.ThirdPersonCharacter
             else
             {
                 _animator.SetBool("IsMoving", false);
-           }
+            }
         }
 
         private void StartMove(InputAction.CallbackContext obj)
         {
-            _playerMovement = obj.ReadValue<Vector2>();
+            var joystick = obj.ReadValue<Vector2>();
+            _playerMovement = new Vector3(joystick.x, 0, joystick.y);
+
         }
 
         private void UpdateMove(InputAction.CallbackContext obj)
         {
-            _playerMovement = obj.ReadValue<Vector2>();
+            var joystick = obj.ReadValue<Vector2>();
+            _playerMovement = new Vector3(joystick.x, 0, joystick.y);
+
         }
 
         private void EndMove(InputAction.CallbackContext obj)
