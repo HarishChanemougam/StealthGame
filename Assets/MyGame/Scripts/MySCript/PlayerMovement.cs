@@ -123,7 +123,8 @@ namespace Retro.ThirdPersonCharacter
         {
             _moveInput.action.started += StartMove;
             _moveInput.action.performed += UpdateMove;
-            _moveInput.action.canceled += EndMove;        
+            _moveInput.action.canceled += EndMove;
+            _moveInput.action.started += StartAttack;
         }
 
         private void Update()
@@ -181,6 +182,11 @@ namespace Retro.ThirdPersonCharacter
         private void EndMove(InputAction.CallbackContext obj)
         {
             _playerMovement = new Vector3(0, 0, 0);
+        }
+
+        private void StartAttack(InputAction.CallbackContext obj)
+        {
+            _animator.SetTrigger("Attack");
         }
 
         private void LateUpdate()
