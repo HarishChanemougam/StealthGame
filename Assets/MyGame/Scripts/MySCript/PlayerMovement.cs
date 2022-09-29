@@ -159,8 +159,7 @@ namespace Retro.ThirdPersonCharacter
             {
                _animator.SetBool("IsMoving", true); //Moving Animator
                _animator.SetFloat("InputX", _playerMovement.x); //X Axis Control
-               _animator.SetFloat("InputZ", _playerMovement.z); //Z Axis Control
-               _animator.SetFloat("InputY",_playerMovement.y); //Y Axis Control
+               _animator.SetFloat("InputZ",_playerMovement.z); //Y Axis Control
                 
                 var tmpDirection = (_playerMovement * _speed * Time.deltaTime);//ScriptKevinCamera
                 var forwardForCamera = _camera.transform.TransformDirection(tmpDirection);//ScriptKevinCamera

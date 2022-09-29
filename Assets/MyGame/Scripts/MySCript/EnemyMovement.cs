@@ -8,17 +8,18 @@ using UnityEngine;
 using UnityEngine.Rendering.UI;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    /*
-    [SerializeField] float _moveSpeed;
-    [SerializeField] float _attackDistance;
-    [SerializeField] Animator _animator;
-    [SerializeField] PlayerMovement _player;
-    [SerializeField] Rigidbody _root;
-    private Rigidbody _rb;
 
+    [SerializeField] float _moveSpeed; //Enemy Moving Speed
+    [SerializeField] float _attackDistance; //Attacking Zone
+    [SerializeField] Animator _animator; //Enemy Animator
+    [SerializeField] PlayerMovement _player; //Player Movement Script To Enemy
+  
+
+   
     public bool IsWalking => _appliedVector.magnitude > 0.01f;
 
     public float WalkDistance => _appliedVector.magnitude;
@@ -26,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
     Vector3 _directionAsked;
     Vector3 _appliedVector;
     Vector3 _direction;
+    string _enemy;
     bool idle_normal;
     bool idle_combat;
     bool dead;
@@ -46,9 +48,9 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    private void Start()
+   /* private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+       _enemy = GetComponent<Rigidbody>();
         _player = FindObjectOfType<PlayerMovement>();
     }
 
@@ -78,7 +80,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb Vector3 = (new Vector3 = transform.forward * _moveSpeed * 3);
+        *//*_rb Vector3 = (new Vector3 = transform.forward * _moveSpeed * 3);*//*
 
         _animator.SetBool("move_forward", _direction.magnitude > 0.1f);
         _animator.SetBool("idle_normal", idle_normal);
@@ -110,6 +112,6 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-    }
-    */
+    }*/
+
 }
