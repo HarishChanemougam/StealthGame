@@ -1,4 +1,4 @@
-/*using NaughtyAttributes;
+using NaughtyAttributes;
 using Retro.ThirdPersonCharacter;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using UnityEngine.Rendering;
 
 public class EnemyMovement : MonoBehaviour
 {
+    /*
     [SerializeField] float _moveSpeed;
     [SerializeField] float _attackDistance;
     [SerializeField] Animator _animator;
@@ -77,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        *//*_rb Vector3 = (new Vector3 = transform.forward * _moveSpeed * 3);*//*
+        _rb Vector3 = (new Vector3 = transform.forward * _moveSpeed * 3);
 
         _animator.SetBool("move_forward", _direction.magnitude > 0.1f);
         _animator.SetBool("idle_normal", idle_normal);
@@ -110,5 +111,5 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
+    */
 }
-*/

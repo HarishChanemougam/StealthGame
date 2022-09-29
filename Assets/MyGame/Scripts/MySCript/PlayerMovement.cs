@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -11,37 +12,44 @@ using static UnityEngine.LightAnchor;
 
 namespace Retro.ThirdPersonCharacter
 {
-    [RequireComponent(typeof(PlayerInput))]
-    /*[RequireComponent(typeof(Animator))]*/
-  /*  [RequireComponent(typeof(Combat))]
-    [RequireComponent(typeof(Rigidbody))]*/
-    public class PlayerMovement : MonoBehaviour
+    public class    PlayerMovement : MonoBehaviour
     {
+        //Player Movement//
+    [SerializeField] InputActionReference _moveInput; //PlayerMoveInput
+    [SerializeField] InputActionReference _jumpInput; //PlayerMoveInput
+    [SerializeField] Transform _root; //RootMotion
+    [SerializeField] Animator _animator; //PlayerAnimator
+    [SerializeField] float _movingThreshold; //Threshold
+    [SerializeField] float _speed; //PlayerSpeed
 
-    [SerializeField] InputActionReference _moveInput;
-    [SerializeField] Transform _root;
-    [SerializeField] Animator _animator;
-    [SerializeField] float _movingThreshold;
-    [SerializeField] float _speed;
+
+        //Player Jump//
+        [SerializeField] float _gravity = 9f; //WorldSpaceGravity
+        [SerializeField] float _jumpForce;
+        [SerializeField] float _pullDown = 3f; //GravityTowardsGround
+
 
         #region
-    [SerializeField] bool _followCameraOrientation;//ScriptKevinCamera
-    [SerializeField, ShowIf(nameof(_followCameraOrientation))] Camera _camera;//ScriptKevinCamera
-    [SerializeField] CharacterController _controller;//ScriptKevinCamera
+        //Camera Fallow//
+    [SerializeField] bool _followCameraOrientation;//ScriptKevinCamera //FollowCamera
+    [SerializeField, ShowIf(nameof(_followCameraOrientation))] Camera _camera;//ScriptKevinCamera  //CameraOrientation
+    [SerializeField] CharacterController _controller;//ScriptKevinCamera //CharacterController
         #endregion
 
-        private PlayerInput playerInput;
-        string _playet;
-        float _speedOfMovementVariabale;
-        Vector3 _playerMovement;
-        Vector3 _direction;
-        Vector3 _aimDirection;
+        private PlayerInput playerInput; //PlayerInputForCamera
+
+
+        /*Vector3 _playerMovement;*/
+        bool _jump; //PlayerJumpingHeight
+        Vector3 _direction; //PLayerMovingDirection
+        Vector3 _aimDirection; //PlayerAimingDirection
 
         #region
-        Vector3 _directionFromBrain;//ScriptKevinCamera
+        Vector3 _playerMovement;//ScriptKevinCamera
         Vector3 _calculatedDirection;//ScriptKevinCamera
-        #endregion
 
+        public event UnityAction<Vector3> OnMove;//PhysicalImpactOnToMove
+        #endregion
         #region
         /*[SerializeField] Animator _animator;
         [SerializeField] PlayerInput _playerInput;
@@ -119,82 +127,89 @@ namespace Retro.ThirdPersonCharacter
             _animator.SetFloat("InputY", lastMovementInput.y);
         }*/
         #endregion
+
+
+        //////////////////////////PLayer Movement Joystick///////////////////////////
         private void Start()
         {
-            _moveInput.action.started += StartMove;
-            _moveInput.action.performed += UpdateMove;
-            _moveInput.action.canceled += EndMove;
-            _moveInput.action.started += StartAttack;
+            _moveInput.action.started += StartMove; //Player Starting An Action (walk)
+            _moveInput.action.performed += StartMove; //Player Perfoming A Move (walk)
+            _moveInput.action.canceled += EndMove; //Player Ending An Action ( walk)
+
+
+            _jumpInput.action.started += StartJump;
+            //_moveInput.action.started += StartAttack; //Player Starting to Attack 
+        }
+
+        private void StartJump(InputAction.CallbackContext obj)
+        {
+            _jump = true;
         }
 
         private void Update()
         {
-            _root.transform.Translate(_playerMovement * Time.deltaTime * _speed * 5);
+            Debug.Log($"{_playerMovement}");
 
-            if(_playerMovement.magnitude > _movingThreshold)
+            if (_followCameraOrientation)   // Follow camera orientation //ScriptKevinCamera
             {
-                if (_animator == null) return;
+                _controller.transform.rotation = Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0);
+            }
 
-               _animator.SetBool("IsMoving", true);
-               _animator.SetFloat("InputX", _playerMovement.x);
-               _animator.SetFloat("InputZ", _playerMovement.z);
-               _animator.SetFloat("InputY",_playerMovement.y);
-
-
-                #region
-                var tmpDirection = (_directionFromBrain * _speed * Time.deltaTime);//ScriptKevinCamera
+            if (_playerMovement.magnitude > _movingThreshold)
+            {
+               _animator.SetBool("IsMoving", true); //Moving Animator
+               _animator.SetFloat("InputX", _playerMovement.x); //X Axis Control
+               _animator.SetFloat("InputZ", _playerMovement.z); //Z Axis Control
+               _animator.SetFloat("InputY",_playerMovement.y); //Y Axis Control
+                
+                var tmpDirection = (_playerMovement * _speed * Time.deltaTime);//ScriptKevinCamera
                 var forwardForCamera = _camera.transform.TransformDirection(tmpDirection);//ScriptKevinCamera
                 _calculatedDirection.x = forwardForCamera.x;//ScriptKevinCamera
                 _calculatedDirection.z = forwardForCamera.z;//ScriptKevinCamera
-
-                if (_followCameraOrientation)   // Follow camera orientation //ScriptKevinCamera
-                {
-                    var lookAtDirection = new Vector3(_camera.transform.forward.x, 0, _camera.transform.forward.z);//ScriptKevinCamera
-                    _controller.transform.LookAt(_controller.transform.position + lookAtDirection);//ScriptKevinCamera
-                }
-                else  // Follow direction applied //ScriptKevinCamera
-                {
-
-                }
-                #endregion
             }
-
             else
             {
-                _animator.SetBool("IsMoving", false);
+                _animator.SetBool("IsMoving", false); //Animator Stops If No Input Action
+                _calculatedDirection.x = 0;
+                _calculatedDirection.z = 0;
             }
+
+            if(_controller.isGrounded) // To Know If The Player Touching The Ground Or Not 
+            {
+                _calculatedDirection.y = 0;
+            }
+            else
+            {
+                _calculatedDirection.y += _gravity * Time.deltaTime;
+            }
+
+            if(_jump) //Euuuu....Jump....Like The Thing We Do In A Trampoline 
+            {
+                _jump = false;
+                if(_controller.isGrounded)
+                {
+                    _calculatedDirection.y = _jumpForce; //SCriptKevin //To Jump
+                }
+            }
+
+            _controller.Move(_calculatedDirection * Time.deltaTime); //Camera Attached To Player
+            OnMove?.Invoke(_calculatedDirection); //Camera Attached To Player
         }
 
-        private void StartMove(InputAction.CallbackContext obj)
+        private void StartMove(InputAction.CallbackContext obj) //Staring A Move
         {
             var joystick = obj.ReadValue<Vector2>();
             _playerMovement = new Vector3(joystick.x, 0, joystick.y);
-
         }
 
-        private void UpdateMove(InputAction.CallbackContext obj)
-        {
-            var joystick = obj.ReadValue<Vector2>();
-            _playerMovement = new Vector3(joystick.x, 0, joystick.y);
-
-        }
-
-        private void EndMove(InputAction.CallbackContext obj)
+        private void EndMove(InputAction.CallbackContext obj) //Ending A Move
         {
             _playerMovement = new Vector3(0, 0, 0);
         }
 
-        private void StartAttack(InputAction.CallbackContext obj)
+        private void StartAttack(InputAction.CallbackContext obj) //Starting to Attack
         {
             _animator.SetTrigger("Attack");
         }
-
-        private void LateUpdate()
-        {
-            playerInput = GetComponent<PlayerInput>();
-        }
-     
     }
-
-    
 }
