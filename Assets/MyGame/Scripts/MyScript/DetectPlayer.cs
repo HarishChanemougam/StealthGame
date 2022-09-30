@@ -7,7 +7,7 @@ public class DetectPlayer : MonoBehaviour
 {
     [SerializeField] EnemyMovement _Enemy;
 
-    /*private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.attachedRigidbody.TryGetComponent<PlayerTag>(out var player))
         {
@@ -21,5 +21,5 @@ public class DetectPlayer : MonoBehaviour
         {
             _Enemy.ClearTarget();
         }
-    }*/
+    }
 }
