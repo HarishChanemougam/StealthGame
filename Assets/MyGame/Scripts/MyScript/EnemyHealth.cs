@@ -6,20 +6,20 @@ using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] int _startHealth;
-    [SerializeField] int _maxHealth;
-    [SerializeField] UnityEvent _onDie;
+    [SerializeField] int _startHealth; //Enemy Staring Health
+    [SerializeField] int _maxHealth; //Enemy Maximum Health 
+    [SerializeField] UnityEvent _onDie; //Enemy Health To Die
 
-    int _currentHealth;
+    int _currentHealth; //Current Health Of Enemy
 
-    public event UnityAction OnDamage;
-    public event UnityAction Ondie;
+    public event UnityAction OnDamage; //Enemy Getting Damage
+    public event UnityAction Ondie; //Enemy Die
 
     public int CurrentHealth
     {
         get
         { 
-            return _currentHealth; 
+            return _currentHealth; //Showing The Current Health Of The Enemy 
         } 
     }
 
@@ -27,25 +27,25 @@ public class EnemyHealth : MonoBehaviour
     {
         get
         {
-            { return CurrentHealth / _maxHealth; }
+            { return CurrentHealth / _maxHealth; } //Enemy Dampage Health Calculation
         }
     }
 
-    public bool Dead => CurrentHealth <= 0;
+    public bool Dead => CurrentHealth <= 0; //Enemy Death State
 
     public void Start()
     {
-        _currentHealth = _startHealth;
+        _currentHealth = _startHealth; //Saying That The Current Health Is The Starting Health Of Enemy When Game Starts
     }
 
     internal void Damage()
     {
-        _currentHealth--;
-        OnDamage?.Invoke();
+        _currentHealth--; //Getting Current Health To Dammage
+        OnDamage?.Invoke(); // Invok The Enemy To Damage
 
         if(Dead)
         {
-            Ondie.Invoke();
+            Ondie.Invoke(); //Invok The Enemy To Death 
         }
     }
 }

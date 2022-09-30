@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
 
 
     
-    Vector3 _Vector; //Vector For Rotation
+    Vector3 _Vector; //Vector For Movements
     Vector3 _direction; //The Direction That The Enemy Needs To Go
     string _enemy; //The Enemy
     bool idle_normal; //Enemy Normal Pose Animation
@@ -110,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
 
             StartCoroutine(AttackRoutine); //Waiting Time
 
-            else
+            else//Root Motion To Move
             {
                 _root.MovePosition(_root.position + _Vector); 
             }
