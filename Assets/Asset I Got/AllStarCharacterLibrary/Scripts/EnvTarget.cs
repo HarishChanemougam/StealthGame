@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnvTarget : MonoBehaviour 
 {
-	public bool 			targeted=false;
+	/*public bool 			targeted=false;
 	public Game 			game;
 	public envTargetType	type;
 	public Zone				zone;
@@ -47,6 +47,6 @@ public enum envTargetType
 	lever,
 	console,
 	pickup,
-	draggable
+	draggable*/
 }
 

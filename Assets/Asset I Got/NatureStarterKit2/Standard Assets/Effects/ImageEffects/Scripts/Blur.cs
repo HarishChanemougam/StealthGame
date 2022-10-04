@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
 {
-    [ExecuteInEditMode]
+    /*[ExecuteInEditMode]
     [AddComponentMenu("Image Effects/Blur/Blur")]
     public class Blur : MonoBehaviour
     {
@@ -104,5 +104,5 @@ namespace UnityStandardAssets.ImageEffects
 
             RenderTexture.ReleaseTemporary(buffer);
         }
-    }
+    }*/
 }

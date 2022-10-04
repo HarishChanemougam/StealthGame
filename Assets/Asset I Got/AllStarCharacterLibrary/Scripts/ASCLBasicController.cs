@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class ASCLBasicController : MonoBehaviour 
 {
 
-	public AbilityObject[]	abilities;
+	/*public AbilityObject[]	abilities;
 	public int[]			abilityKeys;
 	public int				abilityIndex;
 	public bool				abilityUse=false;
@@ -1026,5 +1026,5 @@ public class ASCLBasicController : MonoBehaviour
 		if (target.point.y > transform.position.y) jumpTime *=1.9f;
 		animator.SetFloat("JumpTime", jumpTime);
 		angler.gameObject.SetActive(false);
-	}
+	}*/
 }

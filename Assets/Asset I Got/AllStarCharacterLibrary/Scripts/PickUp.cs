@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class PickUp : MonoBehaviour 
 {
-	public Game				game;
+	/*public Game				game;
 	public bool				forEnemy;
 	public bool				forPlayer;
 	public float			radius;
@@ -48,5 +48,5 @@ public class PickUp : MonoBehaviour
 				DestroyImmediate(this.transform.gameObject);
 			}
 		}
-	}
+	}*/
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Zone : MonoBehaviour 
 {
-	public Game 				game;
+	/*public Game 				game;
 	public bool 				world;
 	public int 					index;
 	public List<Zone> 			zones;
@@ -27,5 +27,5 @@ public class Zone : MonoBehaviour
 	void Update()
 	{
 
-	}
+	}*/
 }

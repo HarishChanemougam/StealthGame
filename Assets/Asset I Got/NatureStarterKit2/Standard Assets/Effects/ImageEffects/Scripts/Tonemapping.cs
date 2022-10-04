@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
 {
-    [ExecuteInEditMode]
+    /*[ExecuteInEditMode]
     [RequireComponent(typeof (Camera))]
     [AddComponentMenu("Image Effects/Color Adjustments/Tonemapping")]
     public class Tonemapping : PostEffectsBase
@@ -270,5 +270,5 @@ namespace UnityStandardAssets.ImageEffects
             }
             RenderTexture.ReleaseTemporary(rtSquared);
         }
-    }
+    }*/
 }

@@ -6,7 +6,7 @@ using System.IO;
 using System;
 
 public class Game : MonoBehaviour 
-{
+{/*
 	public bool					paused=false;
 	public bool					keyHeld=false;
 	public bool					keyReleased;
@@ -109,13 +109,13 @@ public class Game : MonoBehaviour
 
 		foreach(Zone zone in allZones)//for some wacko reason you cannot place this in the below loop, fails to init in time
 		{
-			zone.collider.enabled=true;
+			zone.GetComponent<Collider>().enabled=true;
 		}
 		foreach(Zone zone in allZones)
 		{
 			foreach(EnvTarget target in envTargets)
 			{
-				if(zone.collider.bounds.Contains(target.transform.position))
+				if(zone.GetComponent<Collider>().bounds.Contains(target.transform.position))
 				{
 					target.zone = zone;
 				}
@@ -123,7 +123,7 @@ public class Game : MonoBehaviour
 		}
 		foreach(Zone zone in allZones)//for some wacko reason you cannot place this in the above loop, fails to init in time
 		{
-			zone.collider.enabled=false;
+			zone.GetComponent<Collider>().enabled=false;
 		}
 
 	}
@@ -134,18 +134,18 @@ public class Game : MonoBehaviour
 		settingAngle = false;
 		if(!abc.useThird && !abc.mounted)
 		{
-			currentZone.collider.enabled = true;
-			if(!currentZone.collider.bounds.Contains(player.position) || currentZone.world)
+			currentZone.GetComponent<Collider>().enabled = true;
+			if(!currentZone.GetComponent<Collider>().bounds.Contains(player.position) || currentZone.world)
 			{
-				currentZone.collider.enabled = false;
+				currentZone.GetComponent<Collider>().enabled = false;
 				bool zoneFound=false;
 				foreach(Zone zone in allZones)//for some wacko reason you cannot place this in the below loop, fails to init in time
 				{
-					zone.collider.enabled=true;
+					zone.GetComponent<Collider>().enabled=true;
 				}
 				foreach(Zone zone in allZones)
 				{
-					if(zone.collider.bounds.Contains(player.position))
+					if(zone.GetComponent<Collider>().bounds.Contains(player.position))
 					{
 						if(!zone.world)
 						{
@@ -175,10 +175,10 @@ public class Game : MonoBehaviour
 				}
 				foreach(Zone zone in allZones)//for some wacko reason you cannot place this in the above loop, fails to init in time
 				{
-					zone.collider.enabled=false;
+					zone.GetComponent<Collider>().enabled=false;
 				}
 			}
-			currentZone.collider.enabled = false;
+			currentZone.GetComponent<Collider>().enabled = false;
 		}
 		int eCount=0;
 		eBary = Vector3.zero;
@@ -316,5 +316,5 @@ public class Game : MonoBehaviour
 		//	return = true
 		
 		return false;
-	}
+	}*/
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 // texture.
 namespace UnityStandardAssets.ImageEffects
 {
-    [ExecuteInEditMode]
+    /*[ExecuteInEditMode]
     [AddComponentMenu("Image Effects/Blur/Motion Blur (Color Accumulation)")]
     [RequireComponent(typeof(Camera))]
     public class MotionBlur : ImageEffectBase
@@ -72,5 +72,5 @@ namespace UnityStandardAssets.ImageEffects
             Graphics.Blit (source, accumTexture, material);
             Graphics.Blit (accumTexture, destination);
         }
-    }
+    }*/
 }

@@ -9,6 +9,7 @@ using UnityEngine.Rendering.UI;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using UnityEngine.AI;
+using System.Transactions;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Animator _animator; //Enemy Animator
     [SerializeField] PlayerMovement _player; //Player Movement Script To Enemy
     [SerializeField] CharacterController _characterController; //Enemy Character Controller
-  
+
+   [SerializeField] PlayerHealth _PlayerHealth;
     Vector3 _Vector; //Vector For Movements
     Vector3 _direction; //The Direction That The Enemy Needs To Go
     CharacterController _enemy; //The Enemy
@@ -34,12 +36,15 @@ public class EnemyMovement : MonoBehaviour
     PlayerTag _target; //player Tag For Enemy To Find
     bool _attack; //Enemy Attack Bool
     EnemyHealth _health; //Enmey Health Loacation
+    Coroutine _attackRoutine;
 
     IEnumerator AttackRoutine() // Enemy Waiting Time
     {
+        _PlayerHealth.Damage();
         _attack = false; // If Attack Input Is Not On
         yield return new WaitForSeconds(1f); //Waiting Time
         _attack = true; //If Attack Input Is On
+        _attackRoutine = null;
     }
 
 
@@ -53,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(_player.transform.position); //Enemy Looking At The Player 
+       /* transform.LookAt(_player.transform.position); //Enemy Looking At The Player 
         if (_health.CurrentHealth <= 0) //If The Enemy Health Is Under Zero He Dies
         {
             _animator.SetBool("dead", true); //Animation Set For Enemy's Death
@@ -62,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             _animator.SetBool("dead", false); //Animation Will Not Work If The Enmey Is Alive
-        }
+        }*/
     }
 
     public void SetTarget(PlayerTag player) //Setting The Player As The Target For The Player
@@ -76,7 +81,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         _animator.SetBool("move_forward", _direction.magnitude > 0.1f); //Enemy Moving Animator
         _animator.SetBool("idle_normal", idle_normal); //Enemy Normal Idle Animator
         _animator.SetBool("idle_combat", idle_combat); //Enemy Combat idle Animator
@@ -91,18 +95,16 @@ public class EnemyMovement : MonoBehaviour
 
             direction = _target.transform.position - transform.position; //Moving Towards The Player Calculation
             direction.Normalize(); //Pointing The Direction 
-
         }
         _Vector = direction * Time.deltaTime * _moveSpeed; //Moving Speed Caluculation
 
-        if (distanceToPlayer < _attackDistance && _attack) //Enemy Attack Distance
+        if (_target != null && distanceToPlayer < _attackDistance && _attackRoutine==null) //Enemy Attack Distance
         {
             _animator.SetTrigger("attack_short_001"); //Attack Animator
 
             _player.AttackAllCharacters(); //Attack Characters      
 
-            StartCoroutine(AttackRoutine()); //Waiting Time
-
+            _attackRoutine = StartCoroutine(AttackRoutine()); //Waiting Time
         }
         else//Root Motion To Move
         {

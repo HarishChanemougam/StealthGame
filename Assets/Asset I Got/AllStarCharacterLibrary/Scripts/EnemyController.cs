@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class EnemyController : MonoBehaviour 
 {
 
-	public int				ability;
+	/*public int				ability;
 	public AbilityObject[]	abilities;
 
     public Vector3 		movementTargetPosition;
@@ -232,7 +232,7 @@ public class EnemyController : MonoBehaviour
 				attacking=false;
 			}
 
-			/*if(wallBlocked || dropBlocked)
+			*//*if(wallBlocked || dropBlocked)
 			{
 				float closestT = 100.0f;
 				int newIndex = game.abc.trailIndex;
@@ -248,7 +248,7 @@ public class EnemyController : MonoBehaviour
 				movementTargetPosition = game.abc.trail[newIndex];
 				lookAtPos = movementTargetPosition;
 			}
-			*/
+			*//*
 
 
 			//////////////////////////////
@@ -582,6 +582,6 @@ public class EnemyController : MonoBehaviour
 			game.abc.targetedEnemy = null;
 		}
 		targeted = false;
-	}
+	}*/
 	}
 

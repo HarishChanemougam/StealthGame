@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
-{
+{/*
     [CustomEditor (typeof(Tonemapping))]
     class TonemappingEditor : Editor
     {
@@ -77,5 +77,5 @@ namespace UnityStandardAssets.ImageEffects
 
             serObj.ApplyModifiedProperties();
         }
-    }
+    }*/
 }

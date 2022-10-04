@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
 {
-    [ExecuteInEditMode]
+   /* [ExecuteInEditMode]
     [AddComponentMenu("Image Effects/Color Adjustments/Contrast Stretch")]
     public class ContrastStretch : MonoBehaviour
     {
@@ -196,5 +196,5 @@ namespace UnityStandardAssets.ImageEffects
                 adaptRenderTex[curAdaptIndex],
                 materialAdapt);
         }
-    }
+    }*/
 }

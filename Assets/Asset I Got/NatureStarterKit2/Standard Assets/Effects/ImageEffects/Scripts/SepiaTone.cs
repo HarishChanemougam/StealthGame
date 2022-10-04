@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
 {
-    [ExecuteInEditMode]
+    /*[ExecuteInEditMode]
     [AddComponentMenu("Image Effects/Color Adjustments/Sepia Tone")]
     public class SepiaTone : ImageEffectBase
 	{
@@ -12,5 +12,5 @@ namespace UnityStandardAssets.ImageEffects
 		{
             Graphics.Blit (source, destination, material);
         }
-    }
+    }*/
 }

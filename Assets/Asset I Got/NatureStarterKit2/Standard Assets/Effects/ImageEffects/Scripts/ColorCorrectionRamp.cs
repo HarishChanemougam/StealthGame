@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
 {
-    [ExecuteInEditMode]
+    /*[ExecuteInEditMode]
     [AddComponentMenu("Image Effects/Color Adjustments/Color Correction (Ramp)")]
     public class ColorCorrectionRamp : ImageEffectBase {
         public Texture  textureRamp;
@@ -13,5 +13,5 @@ namespace UnityStandardAssets.ImageEffects
             material.SetTexture ("_RampTex", textureRamp);
             Graphics.Blit (source, destination, material);
         }
-    }
+    }*/
 }

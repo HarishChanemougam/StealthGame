@@ -175,6 +175,8 @@ namespace Retro.ThirdPersonCharacter
                 _animator.SetBool("IsMoving", false); //Animator Stops If No Input Action
                 _calculatedDirection.x = 0;
                 _calculatedDirection.z = 0;
+                _animator.SetFloat("InputX", 0);
+                _animator.SetFloat("InputZ", 0);
             }
 
             if(_controller.isGrounded) // To Know If The Player Touching The Ground Or Not 
@@ -207,7 +209,8 @@ namespace Retro.ThirdPersonCharacter
 
         private void EndMove(InputAction.CallbackContext obj) //Ending A Move
         {
-            _playerMovement = new Vector3(0, 0, 0);
+            
+            _playerMovement = new Vector3( 0, 0, 0);
         }
 
         private void StartAttack(InputAction.CallbackContext obj) //Starting to Attack
@@ -222,7 +225,7 @@ namespace Retro.ThirdPersonCharacter
 
         internal void AttackAllCharacters()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

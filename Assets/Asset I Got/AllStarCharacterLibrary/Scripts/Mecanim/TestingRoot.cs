@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TestingRoot : StateMachineBehaviour 
 {
-	ASCLBasicController abc;
+	/*ASCLBasicController abc;
 	
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
@@ -48,5 +48,5 @@ public class TestingRoot : StateMachineBehaviour
 	// OnStateMachineExit is called when exiting a statemachine via its Exit Node
 	//override public void OnStateMachineExit(Animator animator, int stateMachinePathHash) {
 	//
-	//}
+	//}*/
 }

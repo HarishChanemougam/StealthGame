@@ -10,17 +10,23 @@ public class DetectPlayer : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision) //Decting The Player  In Enemy Zone
     {
-        if (collision.attachedRigidbody.TryGetComponent<PlayerTag>(out var player)) //Getting Enemy Calculation
+        if (collision is CharacterController)
         {
-            _Enemy.SetTarget(player); //Setting The Player As The Target To The Enemy
+            if (collision.TryGetComponent<PlayerTag>(out var player)) //Getting Enemy Calculation
+            {
+                _Enemy.SetTarget(player); //Setting The Player As The Target To The Enemy
+            }
         }
     }
 
     public void OnTriggerExit(Collider collision) //Seting The Player To Enemy To Find The Player 
     {
-        if (collision.attachedRigidbody.TryGetComponent<PlayerTag>(out var player)) //Find The Player With Tag Calculation
+        if (collision is CharacterController)
         {
-            _Enemy.ClearTarget(); //No Target Clear Action
+            if (collision.TryGetComponent<PlayerTag>(out var player)) //Find The Player With Tag Calculation
+            {
+                _Enemy.ClearTarget(); //No Target Clear Action
+            }
         }
     }
 }

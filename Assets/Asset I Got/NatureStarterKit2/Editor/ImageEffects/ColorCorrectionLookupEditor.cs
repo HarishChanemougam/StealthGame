@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
-{
+{/*
     [CustomEditor (typeof(ColorCorrectionLookup))]
     class ColorCorrectionLookupEditor : Editor
     {
@@ -86,5 +86,5 @@ namespace UnityStandardAssets.ImageEffects
 
             serObj.ApplyModifiedProperties();
         }
-    }
+    }*/
 }

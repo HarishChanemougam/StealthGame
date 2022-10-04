@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Billboard2 : MonoBehaviour 
 {
-	Transform 			camera;
+	/*Transform 			camera;
 	public bool		flipFacing;
 
 	// Use this for initialization
@@ -16,5 +16,5 @@ public class Billboard2 : MonoBehaviour
 	void LateUpdate () 
 	{
 		transform.rotation = camera.rotation;
-	}
+	}*/
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MouseOrbit : MonoBehaviour 
 {
-	public Transform 		target;
+	/*public Transform 		target;
 	public float 			distance = 15f;
 	public bool				useCamAngle = false;
 	public Game				game;
@@ -83,14 +83,14 @@ public class MouseOrbit : MonoBehaviour
 				{
 					if(camAngle.usePlayerForward==true)
 					{
-						/*
+						*//*
 						Vector3 tempVec = game.player.position;
 						tempVec += game.player.forward * -(camAngle.xzDistance);
 						tempVec.y = camAngle.positionHeight + game.abc.transform.position.y;
 						transform.position = tempVec;
 						transform.forward = ((game.player.transform.position + transform.up * camAngle.cameraTargetHeight)-transform.position).normalized;
 						transform.position += camAngle.localOffset.x*transform.right + camAngle.localOffset.y*transform.up + camAngle.localOffset.z*transform.forward;
-						*/
+						*//*
 					}
 				}
 			}
@@ -112,5 +112,5 @@ void OnGUI()
 
 		string tempString = "leftALT+LMB to orbit,   leftALT+RMB to zoom,   leftALT+MMB to pan";
 		GUI.Label (new Rect (10, 25,1000, 20), tempString);
-	}
+	}*/
 }
