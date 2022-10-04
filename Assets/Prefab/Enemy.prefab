@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7149561634255011553}
   - component: {fileID: 4398412189681073477}
+  - component: {fileID: 5460984635936687815}
   m_Layer: 0
   m_Name: EnemyBrain
   m_TagString: Untagged
@@ -48,6 +49,25 @@ MonoBehaviour:
   _attackDistance: 0
   _animator: {fileID: 0}
   _player: {fileID: 0}
+  _characterController: {fileID: 0}
+--- !u!143 &5460984635936687815
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3918027398144214701}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3919105243151131421
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,6 +77,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3919105243151131418}
+  - component: {fileID: 1698576014355549485}
+  - component: {fileID: 781448514107212457}
+  - component: {fileID: 2381974807877328751}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -83,6 +106,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 135.166, z: 0}
+--- !u!143 &1698576014355549485
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919105243151131421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &781448514107212457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919105243151131421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f66cd6ec8deb26418fed07993538ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHealth: 10
+  _maxHealth: 10
+  _onDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3919105243151131421}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &2381974807877328751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919105243151131421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c103783dcee412744adb03df177731c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Enemy: {fileID: 4398412189681073477}
 --- !u!1 &4018649374775682013
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4403621473026179530}
   - component: {fileID: 3694710519314993980}
+  - component: {fileID: 4410446648235781266}
   m_Layer: 0
   m_Name: Render
   m_TagString: Untagged
@@ -215,6 +299,26 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!95 &4410446648235781266
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176066913417178908}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: be5995a9158bda9459c22d48acd79a3f, type: 3}
+  m_Controller: {fileID: 9100000, guid: bd381ffbd2cda7a4da39842af2be8821, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3919105243385522975
 PrefabInstance:
   m_ObjectHideFlags: 0

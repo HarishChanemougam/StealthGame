@@ -1,3 +1,5 @@
-﻿internal class PlayerTag
+﻿using UnityEngine;
+
+public class PlayerTag : MonoBehaviour
 {
 }

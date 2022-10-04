@@ -19,12 +19,9 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] PlayerMovement _player; //Player Movement Script To Enemy
     [SerializeField] CharacterController _characterController; //Enemy Character Controller
   
-
-
-    
     Vector3 _Vector; //Vector For Movements
     Vector3 _direction; //The Direction That The Enemy Needs To Go
-    string _enemy; //The Enemy
+    CharacterController _enemy; //The Enemy
     bool idle_normal; //Enemy Normal Pose Animation
     bool idle_combat; //Enemy Combat Pose Animation
     bool dead; //Enemy Death Animation
@@ -36,7 +33,7 @@ public class EnemyMovement : MonoBehaviour
 
     PlayerTag _target; //player Tag For Enemy To Find
     bool _attack; //Enemy Attack Bool
-    private object _health; //Enmey Health Loacation
+    EnemyHealth _health; //Enmey Health Loacation
 
     IEnumerator AttackRoutine() // Enemy Waiting Time
     {
@@ -49,18 +46,14 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         _enemy = GetComponent<CharacterController>();// Character Controller For The Enemy
-
-        CharacterController Vector3 = (new Vector3 = transform.forward * _moveSpeed * 3); //Make Enemy Move
-
+        _direction = transform.forward * _moveSpeed * 3; //Make Enemy Move
         _characterController.transform.rotation = Quaternion.Euler(0, _player.transform.rotation.eulerAngles.y, 0); //Rotation Mecanisme For Enemy
-
         _player = FindObjectOfType<PlayerMovement>(); //Chasing The Player 
     }
 
     private void Update()
     {
         transform.LookAt(_player.transform.position); //Enemy Looking At The Player 
-
         if (_health.CurrentHealth <= 0) //If The Enemy Health Is Under Zero He Dies
         {
             _animator.SetBool("dead", true); //Animation Set For Enemy's Death
@@ -106,14 +99,14 @@ public class EnemyMovement : MonoBehaviour
         {
             _animator.SetTrigger("attack_short_001"); //Attack Animator
 
-            _player.AttackAllCharacters(); //Attack Characters
+            _player.AttackAllCharacters(); //Attack Characters      
 
-            StartCoroutine(AttackRoutine); //Waiting Time
+            StartCoroutine(AttackRoutine()); //Waiting Time
 
-            else//Root Motion To Move
-            {
-                _root.MovePosition(_root.position + _Vector); 
-            }
+        }
+        else//Root Motion To Move
+        {
+            _enemy.Move(_Vector); 
         }
 
     }

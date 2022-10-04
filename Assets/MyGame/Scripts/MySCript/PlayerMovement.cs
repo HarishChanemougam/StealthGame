@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,7 +13,7 @@ using static UnityEngine.LightAnchor;
 
 namespace Retro.ThirdPersonCharacter
 {
-    public class    PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         //Player Movement//
     [SerializeField] InputActionReference _moveInput; //PlayerMoveInput
@@ -43,6 +44,7 @@ namespace Retro.ThirdPersonCharacter
         bool _jump; //PlayerJumpingHeight
         Vector3 _direction; //PLayerMovingDirection
         Vector3 _aimDirection; //PlayerAimingDirection
+       
 
         #region
         Vector3 _playerMovement;//ScriptKevinCamera
@@ -139,6 +141,8 @@ namespace Retro.ThirdPersonCharacter
 
             _jumpInput.action.started += StartJump;
             //_moveInput.action.started += StartAttack; //Player Starting to Attack 
+
+
         }
 
         private void StartJump(InputAction.CallbackContext obj)
@@ -209,6 +213,16 @@ namespace Retro.ThirdPersonCharacter
         private void StartAttack(InputAction.CallbackContext obj) //Starting to Attack
         {
             _animator.SetTrigger("Attack");
+        }
+
+        private void AttackAllCharacters (InputAction.CallbackContext obj)
+        {
+            _animator.SetTrigger("Attack");
+        }
+
+        internal void AttackAllCharacters()
+        {
+            throw new NotImplementedException();
         }
     }
 }
