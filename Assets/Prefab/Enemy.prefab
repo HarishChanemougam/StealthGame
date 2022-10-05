@@ -1,5 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3707486173165774407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2703731735612462291}
+  - component: {fileID: 7738332723698713193}
+  - component: {fileID: 6122331941551764791}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2703731735612462291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3707486173165774407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3919105243151131418}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7738332723698713193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3707486173165774407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c103783dcee412744adb03df177731c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Enemy: {fileID: 4398412189681073477}
+--- !u!135 &6122331941551764791
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3707486173165774407}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.7088542
+  m_Center: {x: 0.27703023, y: 2.15, z: 0.0000000020320525}
 --- !u!1 &3918027398144214701
 GameObject:
   m_ObjectHideFlags: 0
@@ -50,6 +109,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _player: {fileID: 0}
   _characterController: {fileID: 0}
+  _PlayerHealth: {fileID: 0}
 --- !u!143 &5460984635936687815
 CharacterController:
   m_ObjectHideFlags: 0
@@ -79,7 +139,6 @@ GameObject:
   - component: {fileID: 3919105243151131418}
   - component: {fileID: 1698576014355549485}
   - component: {fileID: 781448514107212457}
-  - component: {fileID: 2381974807877328751}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -103,6 +162,7 @@ Transform:
   - {fileID: 7149561634255011553}
   - {fileID: 469028499204233804}
   - {fileID: 279148012212629943}
+  - {fileID: 2703731735612462291}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 135.166, z: 0}
@@ -138,34 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startHealth: 10
   _maxHealth: 10
-  _onDie:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3919105243151131421}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &2381974807877328751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3919105243151131421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c103783dcee412744adb03df177731c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Enemy: {fileID: 4398412189681073477}
 --- !u!1 &4018649374775682013
 GameObject:
   m_ObjectHideFlags: 0

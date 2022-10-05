@@ -17,11 +17,13 @@ namespace Retro.ThirdPersonCharacter
     {
         //Player Movement//
     [SerializeField] InputActionReference _moveInput; //PlayerMoveInput
-    [SerializeField] InputActionReference _jumpInput; //PlayerMoveInput
+    [SerializeField] InputActionReference _jumpInput; //PlayerJumpInput
+    [SerializeField] InputActionReference _attackInput; //PlayerAttaclInput
     [SerializeField] Transform _root; //RootMotion
     [SerializeField] Animator _animator; //PlayerAnimator
     [SerializeField] float _movingThreshold; //Threshold
     [SerializeField] float _speed; //PlayerSpeed
+    [SerializeField] EnemyHealth _enemyHealth;
 
 
         //Player Jump//
@@ -42,9 +44,11 @@ namespace Retro.ThirdPersonCharacter
 
         /*Vector3 _playerMovement;*/
         bool _jump; //PlayerJumpingHeight
+        bool _attack;
+       
         Vector3 _direction; //PLayerMovingDirection
         Vector3 _aimDirection; //PlayerAimingDirection
-       
+
 
         #region
         Vector3 _playerMovement;//ScriptKevinCamera
@@ -140,7 +144,8 @@ namespace Retro.ThirdPersonCharacter
 
 
             _jumpInput.action.started += StartJump;
-            //_moveInput.action.started += StartAttack; //Player Starting to Attack 
+
+            _attackInput.action.started += StartAttack; //Player Starting to Attack 
 
 
         }
@@ -216,6 +221,11 @@ namespace Retro.ThirdPersonCharacter
         private void StartAttack(InputAction.CallbackContext obj) //Starting to Attack
         {
             _animator.SetTrigger("Attack");
+
+            _enemyHealth.Damage();
+            _attack = false;
+            _attack = true;
+
         }
 
         private void AttackAllCharacters (InputAction.CallbackContext obj)

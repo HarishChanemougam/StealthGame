@@ -45,6 +45,8 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(1f); //Waiting Time
         _attack = true; //If Attack Input Is On
         _attackRoutine = null;
+       
+
     }
 
 
@@ -85,9 +87,10 @@ public class EnemyMovement : MonoBehaviour
         _animator.SetBool("idle_normal", idle_normal); //Enemy Normal Idle Animator
         _animator.SetBool("idle_combat", idle_combat); //Enemy Combat idle Animator
         _animator.SetBool("damage_001", damage_001); //Enemy Damage Animator
+        
 
         Vector3 direction = Vector3.zero; //End Movements
-        float distanceToPlayer = 10000f; //Recahable Radius To The Player 
+        float distanceToPlayer = 1f; //Recahable Radius To The Player 
 
         if (_target != null) //Info To Do If No Target 
         {

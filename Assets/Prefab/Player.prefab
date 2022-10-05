@@ -140,10 +140,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveInput: {fileID: 0}
   _jumpInput: {fileID: 0}
+  _attackInput: {fileID: 0}
   _root: {fileID: 0}
   _animator: {fileID: 343594761240260482}
   _movingThreshold: 0
   _speed: 0
+  _enemyHealth: {fileID: 0}
   _gravity: 9
   _jumpForce: 0
   _pullDown: 3
@@ -160,6 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7029915967511886943}
   - component: {fileID: 9145905127469832933}
+  - component: {fileID: 7335457828084716856}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -201,10 +204,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startHealth: 20
   _maxHealth: 20
-  _onDie:
-    m_PersistentCalls:
-      m_Calls: []
   _healthBar: {fileID: 0}
+--- !u!114 &7335457828084716856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7029915967511886912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec613e0ac42157543a205865e9ea7fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7029915968451409654
 GameObject:
   m_ObjectHideFlags: 0
