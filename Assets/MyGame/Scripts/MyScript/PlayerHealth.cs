@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int _startHealth;
     [SerializeField] int _maxHealth;
     [SerializeField] HealthBar _healthBar;
-    Animator _animator;
+    [SerializeField] Animator _animator;
     bool death;
 
     int _currentHealth;
@@ -48,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
     {
         _currentHealth = _startHealth;
         _healthBar.setHealth(_maxHealth);
-        MathF.Max(_currentHealth, 0);
+        Mathf.Max(_currentHealth, 0);
     }
 
     internal void Damage()
@@ -59,20 +59,11 @@ public class PlayerHealth : MonoBehaviour
         if(IsDead)
         {
             OnDie?.Invoke();
-            
-
+            _animator.SetTrigger("Death");
         }
 
         _healthBar.setHealth(CurrentHealth);
         
        
-    }
-
-    private void Update()
-    {
-        if(_currentHealth != 0)
-        {
-            _animator.SetTrigger("death");
-        }
     }
 }

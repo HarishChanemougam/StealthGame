@@ -9,12 +9,12 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int _startHealth; //Enemy Staring Health
     [SerializeField] int _maxHealth; //Enemy Maximum Health 
+    [SerializeField]Animator _animator;
 
     int _currentHealth; //Current Health Of Enemy
 
     public event UnityAction OnDamage; //Enemy Getting Damage
     public event UnityAction Ondie; //Enemy Die
-    Animator _animator;
     bool dead;
 
     public int CurrentHealth
@@ -38,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
     public void Start()
     {
         _currentHealth = _startHealth; //Saying That The Current Health Is The Starting Health Of Enemy When Game Starts
-        MathF.Max(_currentHealth, 0);
+        Mathf.Max(_currentHealth, 0);
     }
 
     internal void Damage()
@@ -49,14 +49,8 @@ public class EnemyHealth : MonoBehaviour
         if(Dead)
         {
             Ondie?.Invoke(); //Invok The Enemy To Death 
-        }
-    }
-
-    private void Update()
-    {
-        if (_currentHealth != 0)
-        {
             _animator.SetTrigger("dead");
         }
     }
+
 }
