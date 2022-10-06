@@ -19,7 +19,7 @@ public class ExtendedFlycam : MonoBehaviour
                       Shift:    Move faster
                     Control:    Move slower
                         End:    Toggle cursor locking to screen (you can also press Ctrl+P to toggle play mode on and off).
-	*/
+	*//*
 
 	public float cameraSensitivity = 90;
 	public float climbSpeed = 4;
@@ -68,5 +68,5 @@ public class ExtendedFlycam : MonoBehaviour
 		{
 			Screen.lockCursor = (Screen.lockCursor == false) ? true : false;
 		}
-	}
+	}*/
 }
