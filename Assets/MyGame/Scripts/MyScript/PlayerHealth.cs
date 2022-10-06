@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int _maxHealth;
     [SerializeField] HealthBar _healthBar;
     [SerializeField] Animator _animator;
+    [SerializeField] GameOver gameOver;
     bool death;
 
     int _currentHealth;
@@ -60,9 +61,12 @@ public class PlayerHealth : MonoBehaviour
         {
             OnDie?.Invoke();
             _animator.SetTrigger("Death");
+            gameOver.EndGame();
         }
 
         _healthBar.setHealth(CurrentHealth);
+
+
         
        
     }

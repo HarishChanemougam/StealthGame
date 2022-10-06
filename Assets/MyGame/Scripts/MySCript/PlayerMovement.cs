@@ -40,6 +40,7 @@ namespace Retro.ThirdPersonCharacter
         #endregion
 
         private PlayerInput playerInput; //PlayerInputForCamera
+        
 
 
         /*Vector3 _playerMovement;*/

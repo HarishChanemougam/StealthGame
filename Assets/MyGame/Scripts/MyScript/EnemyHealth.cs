@@ -50,7 +50,8 @@ public class EnemyHealth : MonoBehaviour
         {
             Ondie?.Invoke(); //Invok The Enemy To Death 
             _animator.SetTrigger("dead");
+           
+            Destroy(gameObject, 5);
         }
     }
-
 }
