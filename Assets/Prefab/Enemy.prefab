@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7149561634255011553}
   - component: {fileID: 4398412189681073477}
+  - component: {fileID: 5471761515258715553}
   m_Layer: 0
   m_Name: EnemyBrain
   m_TagString: Untagged
@@ -108,7 +109,27 @@ MonoBehaviour:
   _animator: {fileID: 1261121391}
   _player: {fileID: 0}
   _characterController: {fileID: 445648352}
+  _agent: {fileID: 0}
+  _playerPos: {fileID: 0}
   _PlayerHealth: {fileID: 0}
+--- !u!143 &5471761515258715553
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3918027398144214701}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3919105243151131421
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +141,7 @@ GameObject:
   - component: {fileID: 3919105243151131418}
   - component: {fileID: 781448514107212457}
   - component: {fileID: 445648352}
+  - component: {fileID: 238925893374473135}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -180,6 +202,28 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &238925893374473135
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919105243151131421}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &4018649374775682013
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,8 +19,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Animator _animator; //Enemy Animator
     [SerializeField] PlayerMovement _player; //Player Movement Script To Enemy
     [SerializeField] CharacterController _characterController; //Enemy Character Controller
+    [SerializeField] NavMeshAgent _agent;
+    [SerializeField] Transform _playerPos;
 
-   [SerializeField] PlayerHealth _PlayerHealth;
+    [SerializeField] PlayerHealth _PlayerHealth;
     Vector3 _Vector; //Vector For Movements
     Vector3 _direction; //The Direction That The Enemy Needs To Go
     CharacterController _enemy; //The Enemy
@@ -58,19 +60,10 @@ public class EnemyMovement : MonoBehaviour
         _player = FindObjectOfType<PlayerMovement>(); //Chasing The Player 
     }
 
-    private void Update()
+    /*private void Update()
     {
-       /* transform.LookAt(_player.transform.position); //Enemy Looking At The Player 
-        if (_health.CurrentHealth <= 0) //If The Enemy Health Is Under Zero He Dies
-        {
-            _animator.SetBool("dead", true); //Animation Set For Enemy's Death
-        }
-
-        else
-        {
-            _animator.SetBool("dead", false); //Animation Will Not Work If The Enmey Is Alive
-        }*/
-    }
+        _agent.SetDestination(_playerPos.position);
+    }*/
 
     public void SetTarget(PlayerTag player) //Setting The Player As The Target For The Player
     {
