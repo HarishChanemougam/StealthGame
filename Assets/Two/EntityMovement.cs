@@ -25,5 +25,8 @@ public class EntityMovement : MonoBehaviour
         CalculatedDirection.y = 0;
 
         _characterController.Move(CalculatedDirection); //CharacterController Moving calculation
+
+        float YAxis = _playerCamera.transform.rotation.y;
+        _characterController.transform.rotation = Quaternion.Euler(0, YAxis, 0);
     }
 }

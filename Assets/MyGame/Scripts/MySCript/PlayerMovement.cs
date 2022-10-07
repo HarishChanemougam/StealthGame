@@ -23,7 +23,6 @@ namespace Retro.ThirdPersonCharacter
     [SerializeField] Animator _animator; //PlayerAnimator
     [SerializeField] float _movingThreshold; //Threshold
     [SerializeField] float _speed; //PlayerSpeed
-    [SerializeField] EnemyHealth _enemyHealth;
 
 
         //Player Jump//
@@ -42,6 +41,13 @@ namespace Retro.ThirdPersonCharacter
         private PlayerInput playerInput; //PlayerInputForCamera
         
 
+
+        EnemyHealth _enemyHealth;
+        public EnemyHealth EnemyTarget
+        {
+            get => _enemyHealth;
+            set => _enemyHealth = value;
+        }
 
         /*Vector3 _playerMovement;*/
         bool _jump; //PlayerJumpingHeight
