@@ -15,6 +15,7 @@ public class AIBrain : MonoBehaviour
     #endregion
 
     [SerializeField] NavMeshAgent _agent;
+    [SerializeField] Sensor _vision;
     [SerializeField] Transform _player;
     [SerializeField] Transform[] _path;
     
@@ -50,6 +51,12 @@ public class AIBrain : MonoBehaviour
             case AIState.CHASE:
 
         _agent.SetDestination(_player.position);
+
+                if(_vision.PlayerFound == null)
+                {
+                    _state = AIState.PATROL;
+                }
+                _agent.SetDestination(_vision.PlayerFound.transform.position);
                 break;
 
             case AIState.CATCH:
