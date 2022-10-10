@@ -55,6 +55,7 @@ public class AIBrain : MonoBehaviour
             case AIState.CATCH:
                 break;
 
+
             default:
                 break;
         }
